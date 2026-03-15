@@ -16,7 +16,7 @@ Since there are already numerous ready-made route databases in `.bat` format (pr
 ---
 
 ## 💾 Downloads (Releases)
-If you do not want to install Python, pre-compiled executables are available in the **[Releases](https://github.com/your-profile/Keen2Mi-Routes/releases)** section for:
+If you do not want to install Python, pre-compiled executables are available in the **[Releases](https://github.com/MarkinF1/Keen2Mi-Routes/releases)** section for:
 * 🪟 **Windows** (`.exe`)
 * 🐧 **Linux** (binary file)
 
