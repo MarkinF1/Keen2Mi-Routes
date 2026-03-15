@@ -1,58 +1,57 @@
 # Keen2Mi-Routes 🚀
 
-Утилита для автоматического импорта списков IP-маршрутов из формата Keenetic/Windows (`.bat`) в роутеры Xiaomi (прошивки MiWiFi/LuCI).
+A utility for automatically importing IP route lists from Keenetic/Windows (`.bat`) format into Xiaomi routers (MiWiFi/LuCI firmware).
 
-## 📖 Описание проекта
-В роутерах Keenetic реализован удобный импорт таблиц маршрутизации из файлов. В интерфейсе Xiaomi (MiWiFi) такая возможность отсутствует — каждый адрес приходится вводить вручную.
+## 📖 Project Description
+Keenetic routers feature a convenient built-in tool for importing routing tables from files. In the Xiaomi (MiWiFi) interface, this feature is missing—each address must be entered manually.
 
-Так как в сети уже существует множество готовых баз маршрутов в формате `.bat` (подготовленных для Keenetic), этот скрипт позволяет использовать их повторно. Программа парсит файлы, конвертирует данные и сама «вбивает» их в ваш роутер Xiaomi через API.
+Since there are already numerous ready-made route databases in `.bat` format (prepared for Keenetic) available online, this script allows you to reuse them. The program parses the files, converts the data, and "injects" them into your Xiaomi router via API.
 
-### Как это работает:
-1. **Парсинг**: Скрипт находит строки `route add <IP> mask <MASK>` в текстовых файлах.
-2. **Конвертация**: Преобразует маски в формат CIDR (например, из `255.255.255.255` в `/32`), который понимает Xiaomi.
-3. **Автоматизация**: Скрипт отправляет POST-запросы на эндпоинт роутера `smartvpn_url`, имитируя ручной ввод через веб-интерфейс.
-4. **Безопасность**: Никакие токены не сохраняются в коде — всё вводится динамически при запуске.
+### How it works:
+1. **Parsing**: The script searches for `route add <IP> mask <MASK>` strings in text files.
+2. **Conversion**: It converts subnet masks into CIDR format (e.g., from `255.255.255.255` to `/32`), which Xiaomi understands.
+3. **Automation**: The script sends POST requests to the router's `smartvpn_url` endpoint, mimicking manual entry via the web interface.
+4. **Security**: No tokens are stored in the code—everything is entered dynamically at runtime.
 
 ---
 
-## 💾 Загрузка (Releases)
-Если вы не хотите устанавливать Python, в разделе **[Releases](https://github.com/твой-профиль/Keen2Mi-Routes/releases)** уже доступны готовые исполняемые файлы для:
+## 💾 Downloads (Releases)
+If you do not want to install Python, pre-compiled executables are available in the **[Releases](https://github.com/your-profile/Keen2Mi-Routes/releases)** section for:
 * 🪟 **Windows** (`.exe`)
-* 🐧 **Linux** (бинарный файл)
+* 🐧 **Linux** (binary file)
 
 ---
 
-## 🛠 Требования для запуска из исходников
-Для работы скрипта требуется **Python 3.x** и библиотека `requests`.
+## 🛠 Requirements for Running from Source
+To run the script, you need **Python 3.x** and the `requests` library.
 
-### Установка зависимостей:
+### Installing dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-### 🚀 Инструкция по использованию
+### 🚀 Usage Instructions
 
-1. Получите STOK:
-   * Войдите в админку роутера в браузере.
-   * Скопируйте из адресной строки значение после ;stok=. (Пример: 945654750a6503c0c3a1n499b7200j14.)
+1. Get the STOK:
+   * Log in to your router's admin panel in a browser.
+   * Copy the value following ;stok= from the address bar. (Example: 945654750a6503c0c3a1n499b7200j14)
 
-2. Запустите программу:
+2. Run the program:
 ```bash
 python main.py
 ```
 
-Или релизную версию для вашей ОС.
+Or run the release version specific to your OS.
 
-3. Введите данные:
+3. Enter the data:
 
-    IP роутера: Обычно 192.168.1.1.
+    Router IP: Usually 192.168.1.1.
 
-    STOK: Вставьте скопированный ключ.
+    STOK: Paste the copied key.
 
-    Путь: Можно указать путь к конкретному файлу или к целой папке (скрипт сам найдет все файлы внутри, включая вложенные папки).
+    Path: You can specify the path to a specific file or an entire folder (the script will automatically find all files inside, including nested subfolders).
 
-⚠️ Важное примечание
-
-Токен stok привязан к вашей текущей сессии. Если вы выйдете из админки в браузере или пройдет слишком много времени, токен станет недействительным. В этом случае просто обновите страницу в браузере и возьмите новый токен.
+⚠️ Important Note
+The stok token is tied to your current session. If you log out of the admin panel in your browser or if too much time passes, the token will become invalid. If this happens, simply refresh the page in your browser and get a new token.
